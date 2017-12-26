@@ -1,2 +1,6 @@
 # add links here
 https://labrosa.ee.columbia.edu/millionsong/tasteprofile
+-- music
+
+https://github.com/zygmuntz/goodbooks-10k
+-- books
