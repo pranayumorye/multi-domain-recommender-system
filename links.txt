@@ -7,3 +7,6 @@ https://github.com/zygmuntz/goodbooks-10k
 
 https://grouplens.org/datasets/movielens/
 -- movies
+
+https://pdfs.semanticscholar.org/02ff/37cd0059cf1af1ecfa62c32304c05ab3bf96.pdf
+-- svd paper
