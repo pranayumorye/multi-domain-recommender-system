@@ -10,3 +10,6 @@ https://grouplens.org/datasets/movielens/
 
 https://pdfs.semanticscholar.org/02ff/37cd0059cf1af1ecfa62c32304c05ab3bf96.pdf
 -- svd paper
+
+http://blog.untrod.com/2016/06/simple-similar-products-recommendation-engine-in-python.html
+-- tf-idf reference
