@@ -15,4 +15,7 @@ http://blog.untrod.com/2016/06/simple-similar-products-recommendation-engine-in-
 -- tf-idf reference
 
 http://www.cs.cmu.edu/~dbamman/booksummaries.html
--- book summary dataset for tf-idf
+-- book summary dataset for tf-idf/cos~
+
+http://www.cs.cmu.edu/~ark/personas/
+-- movie summary dataset for tf-idf/cos~
