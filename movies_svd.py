@@ -2,9 +2,14 @@ import pandas as pd
 import numpy as np
 from scipy.sparse.linalg import svds
 
-ratings_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/ratings.dat', 'rt', encoding='latin1').readlines()]
-users_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/users.dat', 'rt', encoding='latin1').readlines()]
-movies_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/movies.dat', 'rt', encoding='latin1').readlines()]
+#ratings_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/ratings.dat', 'rt', encoding='latin1').readlines()]
+#users_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/users.dat', 'rt', encoding='latin1').readlines()]
+#movies_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/movies.dat', 'rt', encoding='latin1').readlines()]
+
+ratings_list = [i.strip().split("::") for i in open('../datasets/ml-1m/ratings.dat', 'rt', encoding='latin1').readlines()]
+users_list = [i.strip().split("::") for i in open('../datasets/ml-1m/users.dat', 'rt', encoding='latin1').readlines()]
+movies_list = [i.strip().split("::") for i in open('../datasets/ml-1m/movies.dat', 'rt', encoding='latin1').readlines()]
+
 
 ratings_df = pd.DataFrame(ratings_list, columns = ['UserID', 'MovieID', 'Rating', 'Timestamp'], dtype = int)
 movies_df = pd.DataFrame(movies_list, columns = ['MovieID', 'Title', 'Genres'])
@@ -49,7 +54,7 @@ def recommend_movies(predictions_df, userID, movies_df, original_ratings_df, num
 
     return user_full, recommendations
 
-already_rated, predictions = recommend_movies(preds_df, 837, movies_df, ratings_df, 10)
+already_rated, predictions = recommend_movies(preds_df, 838, movies_df, ratings_df, 10)
 
 print(already_rated.head(10))
 print(predictions)
