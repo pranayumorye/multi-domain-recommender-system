@@ -19,3 +19,6 @@ http://www.cs.cmu.edu/~dbamman/booksummaries.html
 
 http://www.cs.cmu.edu/~ark/personas/
 -- movie summary dataset for tf-idf/cos~
+
+https://github.com/markriedl/WikiPlots
+-- watch it for the plot
