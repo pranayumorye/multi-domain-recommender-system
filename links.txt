@@ -26,4 +26,5 @@ https://github.com/markriedl/WikiPlots
 https://stats.stackexchange.com/questions/320962/matrix-factorization-in-recommender-systems-adding-a-new-user
 https://www.quora.com/How-do-I-predict-values-with-Matrix-Factorization-method-in-a-recommender-system
 http://libgen.io/scimag/ads.php?doi=10.1016%2Fj.ins.2007.07.024&downloadname=
+https://hrcak.srce.hr/file/185686
 -- prediction method for CF
