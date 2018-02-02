@@ -54,7 +54,7 @@ def recommend_movies(predictions_df, userID, movies_df, original_ratings_df, num
 
     return user_full, recommendations
 
-already_rated, predictions = recommend_movies(preds_df, 838, movies_df, ratings_df, 10)
+already_rated, predictions = recommend_movies(preds_df, 452, movies_df, ratings_df, 10)
 
 print(already_rated.head(10))
 print(predictions)
