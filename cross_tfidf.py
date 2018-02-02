@@ -3,11 +3,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 df = pd.read_csv("../datasets/combined.csv")
-dfc = df.sample(n=10000)
+dfc = df.sample(n=5000)
 dfc = dfc.reset_index()
 print(dfc.head())
 
-tf = TfidfVectorizer(analyzer='word',ngram_range=(1, 3),min_df=0,stop_words='english')
+tf = TfidfVectorizer(analyzer='word',ngram_range=(1,2),min_df=0,stop_words='english')
 
 tfidf_matrix = tf.fit_transform(dfc['plot'])
 print (tfidf_matrix.shape)
