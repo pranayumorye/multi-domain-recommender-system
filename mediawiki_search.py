@@ -5,7 +5,7 @@ import re
 # list_of_searches = ["animal farm", "hunger games"]
 list_of_searches = pd.read_csv("../datasets/books10k.csv", usecols=["title"])
 regex = re.compile("\(.*\)")
-list_of_searches = list_of_searches[:100]
+list_of_searches = list_of_searches[1001:2000]
 list_of_pageids = pd.read_csv("../datasets/booksummaries.csv", delimiter="\t")["Wiki_id"]
 normalised_df = pd.read_csv("../datasets/titles_and_pageids.csv", delimiter="\t")
 
@@ -25,7 +25,10 @@ for idx, title in list_of_searches.itertuples():
     title = regex.sub("", title)
     parameters["srsearch"] = title + " book novel"
     res = requests.get(base_url, headers=headers, params=parameters)
-    res_json = res.json()["query"]["search"][0]
+    try:
+        res_json = res.json()["query"]["search"][0]
+    except:
+        print("No search results returned")
     print(title)
     print(res_json["title"], str(res_json["pageid"]))
     try:
@@ -39,4 +42,4 @@ for idx, title in list_of_searches.itertuples():
     print()
 
 print(count)
-normalised_df.to_csv("../datasets/titles_and_pageids.csv", sep="\t")
+normalised_df.to_csv("../datasets/titles_and_pageids.csv", sep="\t", index=False)
