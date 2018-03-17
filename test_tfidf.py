@@ -2,13 +2,13 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
-df = pd.read_csv("./tmdb_movies.csv")
+df = pd.read_csv("./combined_final.csv")
 dfc = df
 
 tf = TfidfVectorizer(analyzer='word',ngram_range=(1,3),min_df=0,stop_words='english')
 
-tfidf_matrix = tf.fit_transform(dfc['overview'].values.astype('U'))
-print (tfidf_matrix.shape)
+tfidf_matrix = tf.fit_transform(dfc['plot'].values.astype('U'))
+# print (tfidf_matrix.shape)
 cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
 
 
