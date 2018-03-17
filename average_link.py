@@ -1,4 +1,7 @@
 import ast
+import pandas as pd
+import numpy as np
+import itertools
 
 with open("genre_matrix.txt", "r") as f:
     line = f.readlines()[0]
@@ -37,12 +40,23 @@ def get_similarity(set1, set2):
             pair_sim = get_pair_similarity(i1, i2)
             if pair_sim > max:
                 max = pair_sim
-        print("%s - %s similarity is %f" % (i1, i2, pair_sim))
         sum += max
     
-    return sum/count
+    if(count):
+        return sum/count
+    return 0    
 
-set1 = {"Crime", "Thriller"}
-set2 = {"Documentary"}
+books = pd.read_csv("books_final.csv")[0:100]
+book_id_pairs = []
+similarity_matrix = np.zeros((100, 100))
 
-print(get_similarity(set1, set2))
+for pair in itertools.product(range(0, 100), repeat=2):
+    book_id_pairs.append(pair)
+
+for idx1, idx2 in book_id_pairs:
+    print(idx1, idx2)
+    genre_set1 = ast.literal_eval(books.iloc[idx1]["genres"])
+    genre_set2 = ast.literal_eval(books.iloc[idx2]["genres"])
+    similarity_matrix[idx1, idx2] = np.float16(get_similarity(genre_set1, genre_set2))
+
+np.savetxt("genre_simil_matrix.txt", similarity_matrix)
