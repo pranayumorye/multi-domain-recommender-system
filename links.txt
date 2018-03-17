@@ -28,3 +28,5 @@ https://www.quora.com/How-do-I-predict-values-with-Matrix-Factorization-method-i
 http://libgen.io/scimag/ads.php?doi=10.1016%2Fj.ins.2007.07.024&downloadname=
 https://hrcak.srce.hr/file/185686
 -- prediction method for CF
+
+df['genres'] = df['genres'].apply(lambda x : set.union(*[translation_key[key] for key in ast.literal_eval(x)]))
