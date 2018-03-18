@@ -31,7 +31,8 @@ def get_pair_similarity(genre1, genre2):
 def get_similarity(set1, set2):
     if len(set1) < len(set2):
         set1, set2 = set2, set1
-    
+    if(len(set2) == 0):
+        return 0
     sum = 0
     count = len(set1)
     for i1 in set1:
@@ -41,10 +42,9 @@ def get_similarity(set1, set2):
             if pair_sim > max:
                 max = pair_sim
         sum += max
-    
     if(count):
         return sum/count
-    return 0    
+    return 0  
 
 books = pd.read_csv("books_final.csv")[0:100]
 book_id_pairs = []

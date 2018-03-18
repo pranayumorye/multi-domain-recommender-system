@@ -15,6 +15,7 @@ cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
 cosine_similarities = cosine_similarities[0:100]
 cosine_similarities = cosine_similarities.T
 cosine_similarities = cosine_similarities[0:100]
+cosine_similarities *= 2
 print(cosine_similarities.shape)
 
 np.savetxt("tfidf_simil.txt", cosine_similarities)

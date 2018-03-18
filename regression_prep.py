@@ -23,12 +23,12 @@ genre_simil = np.loadtxt("genre_simil_matrix.txt", dtype=np.float16)
 
 # for length simil
 def get_length_simil(idx1, idx2):
-    return (1 - abs(df.iloc[idx1]["length_rep"] - df.iloc[idx2]["length_rep"])/2)
+    return 2 * (1 - abs(df.iloc[idx1]["length_rep"] - df.iloc[idx2]["length_rep"])/2)
 
 
 # for age simil
 def get_age_simil(idx1, idx2):
-    return (1- abs(df.iloc[idx1]["age"] - df.iloc[idx2]["age"])/3)
+    return 2 * (1- abs(df.iloc[idx1]["age"] - df.iloc[idx2]["age"])/3)
 
 
 # for tfidf simil
@@ -38,7 +38,7 @@ def get_tfidf_simil(idx1, idx2):
 
 # for output vector from collaborative similarities
 def get_collab_simil(idx1, idx2):
-    return (collab_simil[idx1, idx2])
+    return 1 + (collab_simil[idx1, idx2])
 
 
 def get_genre_simil(idx1, idx2):
@@ -77,4 +77,4 @@ regr_data = pd.DataFrame(data={
 
 print(regr_data.head())
 
-regr_data.to_csv("regr_data.csv", index = False, columns=columns)
+regr_data.to_csv("regr_data_final.csv", index = False, columns=columns)
