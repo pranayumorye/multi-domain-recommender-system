@@ -5,21 +5,19 @@ import pandas as pd
 params = {
     "sep": ",",
     "usecols": [
-        "book_id",
-        "original_title",
+        "comb_id",
+        "title",
         "length_rep",
         "age"
     ]
 }
 
-df = pd.read_csv("./books_final.csv", **params)
+df = pd.read_csv("./datasets/content/small_combined_final.csv", **params)
+comb_id_pairs = []
 
-df = df[:100]
-book_id_pairs = []
-
-tfidf_simil = np.loadtxt("tfidf_simil.txt", dtype=np.float16)
-collab_simil = np.loadtxt("collab_simil.txt", dtype=np.float16)
-genre_simil = np.loadtxt("genre_simil_matrix.txt", dtype=np.float16)
+tfidf_simil = np.loadtxt("comb_tfidf_simil.txt", dtype=np.float16)
+collab_simil = np.zeros((1000,1000))
+genre_simil = np.loadtxt("comb_genre_simil_matrix.txt", dtype=np.float16)
 
 # for length simil
 def get_length_simil(idx1, idx2):
@@ -42,11 +40,11 @@ def get_collab_simil(idx1, idx2):
 
 
 def get_genre_simil(idx1, idx2):
-    return genre_simil[idx1, idx2]
+    return 2 * genre_simil[idx1, idx2]
 
 
-for pair in itertools.product(range(0, 100), repeat=2):
-    book_id_pairs.append(pair)
+for pair in itertools.product(range(0, 1000), repeat=2):
+    comb_id_pairs.append(pair)
 
 
 # Storing in a csv
@@ -59,7 +57,8 @@ length_simil_list = []
 genre_simil_list = []
 collab_simil_list = []
 
-for idx1, idx2 in book_id_pairs:
+for idx1, idx2 in comb_id_pairs:
+    print(idx1, idx2)
     tfidf_simil_list.append(get_tfidf_simil(idx1, idx2))
     age_simil_list.append(get_age_simil(idx1, idx2))
     genre_simil_list.append(get_genre_simil(idx1, idx2))
@@ -67,7 +66,7 @@ for idx1, idx2 in book_id_pairs:
     collab_simil_list.append(get_collab_simil(idx1, idx2))
 
 regr_data = pd.DataFrame(data={
-    "id_pair": book_id_pairs,
+    "id_pair": comb_id_pairs,
     "tfidf_simil": tfidf_simil_list,
     "age_simil": age_simil_list,
     "length_simil": length_simil_list,
@@ -77,4 +76,4 @@ regr_data = pd.DataFrame(data={
 
 print(regr_data.head())
 
-regr_data.to_csv("regr_data_final.csv", index = False, columns=columns)
+regr_data.to_csv("comb_regr_data_final.csv", index = False, columns=columns)

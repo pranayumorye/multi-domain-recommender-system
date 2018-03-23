@@ -46,20 +46,18 @@ def get_similarity(set1, set2):
         return sum/count
     return 0  
 
-df = pd.read_csv("./datasets/content/combined_final.csv")
-books = df[2550:3050]
-movies = df[0:500]
-books = books.append(movies)
-book_id_pairs = []
+df = pd.read_csv("./datasets/content/small_combined_final.csv")
+comb_id_pairs = []
 similarity_matrix = np.zeros((1000, 1000))
 
 for pair in itertools.product(range(0, 1000), repeat=2):
-    book_id_pairs.append(pair)
+    comb_id_pairs.append(pair)
 
-for idx1, idx2 in book_id_pairs:
+for idx1, idx2 in comb_id_pairs:
     print(idx1, idx2)
-    genre_set1 = ast.literal_eval(books.iloc[idx1]["genres"])
-    genre_set2 = ast.literal_eval(books.iloc[idx2]["genres"])
+    # print(df.iloc[idx1]["genres"], df.iloc[idx2]["genres"])
+    genre_set1 = ast.literal_eval(df.iloc[idx1]["genres"])
+    genre_set2 = ast.literal_eval(df.iloc[idx2]["genres"])
     similarity_matrix[idx1, idx2] = np.float16(get_similarity(genre_set1, genre_set2))
 
 np.savetxt("comb_genre_simil_matrix.txt", similarity_matrix)

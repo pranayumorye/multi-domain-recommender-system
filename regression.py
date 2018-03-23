@@ -3,7 +3,7 @@ from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
-X = pd.read_csv("regr_data.csv", usecols = ["tfidf_simil","genre_simil","age_simil","length_simil"])
+X = pd.read_csv("regr_data_final.csv", usecols = ["tfidf_simil","genre_simil","age_simil","length_simil"])
 
 y = pd.read_csv("regr_data_final.csv", usecols = ["collab_simil"])
 
