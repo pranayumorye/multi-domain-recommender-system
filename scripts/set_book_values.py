@@ -20,9 +20,8 @@ for idx, row in books.iterrows():
 		books.set_value(idx, "age", 3)
 	elif(year < 1980 and year >= 1930):
 		books.set_value(idx, "age", 2)
-	
 
 print(books.head())
-books.to_csv("books_final.csv", index = False)
+books.to_csv("books_final.csv", index=False)
 
 print("End of script")

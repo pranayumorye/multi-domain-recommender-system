@@ -7,7 +7,7 @@ modified = pd.DataFrame(columns = ["user_id","book_id","rating"])
 
 for idx,row in books.iterrows():
 	id = row["book_id"]
-	temp = pd.DataFrame([[374355,id,3]], columns = ["user_id","book_id","rating"])
+	temp = pd.DataFrame([[374355,id,3]], columns=["user_id","book_id","rating"])
 	modified = modified.append(temp)
 	
 modified.to_csv("addedratings.csv", index = False)	

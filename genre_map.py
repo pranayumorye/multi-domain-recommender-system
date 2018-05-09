@@ -2,7 +2,7 @@ import ast
 import pandas as pd
 
 new = pd.read_csv("books_final.csv")
-old = pd.read_csv("combined_books10k_summaries.csv", delimiter = "\t")
+old = pd.read_csv("combined_books10k_summaries.csv", delimiter="\t")
 
 adventure_genres = set(["Adventure novel", "Young adult literature", 
                         "Children's literature", "Juvenile fantasy", 

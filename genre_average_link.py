@@ -8,6 +8,7 @@ with open("genre_matrix.txt", "r") as f:
 
 genre_matrix = ast.literal_eval(line)
 
+
 def get_pair_similarity(genre1, genre2):
     return genre_matrix[(genre1, genre2)]
 

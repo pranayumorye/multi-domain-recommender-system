@@ -2,19 +2,14 @@ import pandas as pd
 import numpy as np
 from scipy.sparse.linalg import svds
 
-#ratings_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/ratings.dat', 'rt', encoding='latin1').readlines()]
-#users_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/users.dat', 'rt', encoding='latin1').readlines()]
-#movies_list = [i.strip().split("::") for i in open('/home/countnightlock/Downloads/ml-1m/movies.dat', 'rt', encoding='latin1').readlines()]
-
-
 ratings_df = pd.read_csv("./datasets/collab/movies/reduced_ratings.csv")[0:1000000]
 movies_df = pd.read_csv("./tmdb_movies_final.csv")
 movies_df['id'] = movies_df['id'].apply(pd.to_numeric)
 R_df = ratings_df.pivot(index = 'userId', columns ='movieId', values = 'rating').fillna(0)
 R = R_df.as_matrix()
-user_ratings_mean = np.mean(R, axis = 1)
+user_ratings_mean = np.mean(R, axis=1)
 R_demeaned = R - user_ratings_mean.reshape(-1, 1)
-U, sigma, Vt = svds(R_demeaned, k = 50)
+U, sigma, Vt = svds(R_demeaned, k=50)
 
 
 print(Vt.shape)
@@ -37,19 +32,19 @@ def recommend_movies(predictions_df, userID, movies_df, original_ratings_df, num
     
     # Get the user's data and merge in the movie information.
     user_data = original_ratings_df[original_ratings_df.userId == (userID)]
-    user_full = (user_data.merge(movies_df, how = 'left', left_on = 'movieId', right_on = 'id').
-                     sort_values(['rating'], ascending=False)
-                 )
+    user_full = (user_data.merge(movies_df, how='left', left_on='movieId', right_on='id').
+                 sort_values(['rating'], ascending=False)
+                )
 
     print('User {0} has already rated {1} movies.'.format(userID, user_full.shape[0]))
     print('Recommending the highest {0} predicted ratings movies not already rated.'.format(num_recommendations))
-    
+
     # Recommend the highest predicted rating movies that the user hasn't seen yet.
     recommendations = (movies_df[~movies_df['id'].isin(user_full['movieId'])].
          merge(pd.DataFrame(sorted_user_predictions).reset_index(), how = 'left',
-               left_on = 'id',
-               right_on = 'movieId').
-         rename(columns = {user_row_number: 'Predictions'}).
+               left_on='id',
+               right_on='movieId').
+         rename(columns={user_row_number: 'Predictions'}).
          sort_values('Predictions', ascending = False).
                        iloc[:num_recommendations, :-1]
                       )

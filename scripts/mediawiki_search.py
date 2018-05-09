@@ -4,7 +4,7 @@ import re
 
 # list_of_searches = ["animal farm", "hunger games"]
 list_of_searches = pd.read_csv("../datasets/books10k.csv", usecols=["title"])
-regex = re.compile("\(.*\)")
+regex = re.compile(r"\(.*\)")
 list_of_searches = list_of_searches[3002:4001]
 list_of_pageids = pd.read_csv("../datasets/booksummaries.csv", delimiter="\t")["Wiki_id"]
 normalised_df = pd.read_csv("../datasets/titles_and_pageids.csv", delimiter="\t")
