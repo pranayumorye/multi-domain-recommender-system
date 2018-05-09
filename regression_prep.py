@@ -14,6 +14,7 @@ params = {
 
 df = pd.read_csv("./datasets/content/small_combined_final.csv", **params)
 comb_id_pairs = []
+actual_pairs = []
 
 tfidf_simil = np.loadtxt("comb_tfidf_simil.txt", dtype=np.float16)
 collab_simil = np.zeros((1000,1000))
@@ -45,6 +46,12 @@ def get_genre_simil(idx1, idx2):
 
 for pair in itertools.product(range(0, 1000), repeat=2):
     comb_id_pairs.append(pair)
+    actual_pairs.append((df.iloc[pair[0]]["comb_id"], df.iloc[pair[1]]["comb_id"]))
+
+
+
+
+print(actual_pairs.head())
 
 
 # Storing in a csv
@@ -64,9 +71,10 @@ for idx1, idx2 in comb_id_pairs:
     genre_simil_list.append(get_genre_simil(idx1, idx2))
     length_simil_list.append(get_length_simil(idx1, idx2))
     collab_simil_list.append(get_collab_simil(idx1, idx2))
+    print("Done for", idx1, idx2, actual_pairs.iloc[idx1 + idx2*1000 - 1])
 
 regr_data = pd.DataFrame(data={
-    "id_pair": comb_id_pairs,
+    "id_pair": actual_pairs,
     "tfidf_simil": tfidf_simil_list,
     "age_simil": age_simil_list,
     "length_simil": length_simil_list,
