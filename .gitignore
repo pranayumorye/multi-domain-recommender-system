@@ -3,3 +3,5 @@ datasets/*
 comb_genre_simil_matrix.txt
 comb_regr_data_final.csv
 comb_tfidf_simil.txt
+comb_regr_data_final_fix.csv
+comb_id_pairs.csv
